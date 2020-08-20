@@ -1,6 +1,7 @@
-import { useEffect, useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useStore } from "./store.hook";
 import _isEmpty from "lodash/isEmpty";
+import axios from "axios";
 const API_STATE = {
   INITIAL: "INITIAL",
   LOADING: "LOADING",
@@ -29,15 +30,15 @@ export function useApi({ url, defaultData }) {
   // Call api Action
   const call = useCallback(() => {
     apiStore.setState(API_STATE.LOADING);
-    fetch(url)
-      .then((data) => data.json())
+    axios
+      .get(url)
       .then((data) => {
         dataStore.setState(data);
         apiStore.setState(API_STATE.SUCCESS);
       })
       .catch((err) => {
         setError(err);
-        apiStore.etState(API_STATE.FAILED);
+        apiStore.setState(API_STATE.FAILED);
       });
   });
 
