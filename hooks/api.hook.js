@@ -32,7 +32,7 @@ export function useApi({ url, defaultData }) {
     apiStore.setState(API_STATE.LOADING);
     axios
       .get(url)
-      .then((data) => {
+      .then(({ data }) => {
         dataStore.setState(data);
         apiStore.setState(API_STATE.SUCCESS);
       })
@@ -41,7 +41,6 @@ export function useApi({ url, defaultData }) {
         apiStore.setState(API_STATE.FAILED);
       });
   });
-
   return {
     data: dataStore.state,
     ...apiStore.computed,
