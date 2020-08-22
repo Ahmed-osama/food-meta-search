@@ -1,10 +1,12 @@
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "@/styles/theme";
+import { isServer } from "@/utils/common";
+isServer;
 
 function MyApp({ Component, pageProps }) {
   return (
     <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
+      {isServer() ? null : <Component {...pageProps} />}
     </ThemeProvider>
   );
 }
