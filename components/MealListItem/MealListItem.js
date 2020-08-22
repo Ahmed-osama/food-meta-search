@@ -10,7 +10,10 @@ import {
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import { useTheme } from "@material-ui/core/styles";
+import { useRouter } from "next/router";
 const MealListItem = ({ meal_name, price, meal_image, stars }) => {
+  const router = useRouter();
+
   const theme = useTheme();
   return (
     <>
@@ -118,6 +121,7 @@ const MealListItem = ({ meal_name, price, meal_image, stars }) => {
               color="primary"
               style={{ marginTop: "auto" }}
               size="small"
+              onClick={() => router.push("/redirection")}
             >
               View
             </Button>
