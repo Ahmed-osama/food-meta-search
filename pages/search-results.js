@@ -13,20 +13,20 @@ export default function SearchResults() {
   const { data, isFetched, isLoading, hasData } = mealsList;
   return (
     <>
-      <Template header={Header}>
+      <Template header={() => <Header headerText={"results for : ${}"} />}>
         <Grid
           direction="column"
           justify="flex-start"
           alignItems="stretch"
           spacing={2}
-          xs
+          xs={12}
         >
           {isLoading ? (
             <Grid
               direction="row"
               justify="center"
               alignItems="center"
-              xs
+              xs={12}
               style={{ alignSelf: "stretch", height: "calc(100vh - 56px)" }}
               container
             >
