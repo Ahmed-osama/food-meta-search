@@ -10,7 +10,6 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>SEERA FOODS</title>
           <link rel="icon" href="/favicon.ico" />
           <link
             rel="stylesheet"
