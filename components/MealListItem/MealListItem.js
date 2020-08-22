@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import _random from "lodash/random";
 import {
   Paper,
   Grid,
@@ -8,10 +9,16 @@ import {
   Box,
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
+import { useTheme } from "@material-ui/core/styles";
 const MealListItem = ({ meal_name, price, meal_image, stars }) => {
+  const theme = useTheme();
   return (
     <>
-      <Paper elevation={0} variant="square">
+      <Paper
+        elevation={0}
+        variant="square"
+        style={{ marginBottom: "5px", marginTop: "5px" }}
+      >
         <Grid
           direction="row"
           container
@@ -21,7 +28,7 @@ const MealListItem = ({ meal_name, price, meal_image, stars }) => {
           xs
         >
           <Grid item>
-            <img src={meal_image} alt={meal_name} width="100" height="100" />
+            <img src={meal_image} alt={meal_name} width="80" height="80" />
           </Grid>
           <Grid
             item
@@ -32,10 +39,54 @@ const MealListItem = ({ meal_name, price, meal_image, stars }) => {
             container
             style={{ flexGrow: 1 }}
           >
-            <Typography variant="subtitle2" noWrap>
+            <Typography
+              variant="subtitle1"
+              noWrap
+              style={{
+                fontWeight: "bold",
+                color: theme.palette.grey[800],
+              }}
+            >
               {meal_name}
             </Typography>
-            <Rating name="size-small" defaultValue={stars} size="small" />
+            <Typography
+              variant="body2"
+              noWrap
+              style={{ marginBottom: "5px", color: theme.palette.grey[700] }}
+            >
+              rice + 2 pices + water + coke
+            </Typography>
+            <Grid item container spacing={1}>
+              <Rating
+                name="size-small"
+                defaultValue={stars}
+                size="small"
+                className="MuiGrid-item"
+              />
+
+              <Typography
+                variant="body2"
+                noWrap
+                style={{ color: theme.palette.grey[700] }}
+                className="MuiGrid-item"
+              >
+                3.1
+              </Typography>
+
+              <Typography
+                variant="body2"
+                noWrap
+                style={{ color: theme.palette.grey[700] }}
+                className="MuiGrid-item"
+              >
+                ({stars}) reviews
+              </Typography>
+            </Grid>
+            <img
+              src={`./logos/${_random(1, 5)}.png`}
+              alt=""
+              style={{ maxHeight: "20px", maxWidth: "90px", marginTop: "10px" }}
+            />
           </Grid>
           <Grid
             item
