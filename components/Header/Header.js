@@ -1,21 +1,49 @@
 import React from "react";
-import { AppBar, Toolbar, IconButton, Typography } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import MoreIcon from "@material-ui/icons/More";
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  Typography,
+  Grid,
+} from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/FilterList";
 import { useRouter } from "next/router";
 
-const Header = ({ headerText }) => {
+const Header = ({ headerText, meal, filter }) => {
   const router = useRouter();
   return (
     <AppBar position="fixed" color="primary">
       <Toolbar>
-        <Typography variant="h6" onClick={() => router.push("/")}>
-          {headerText}
-        </Typography>
+        <Grid>
+          {meal ? (
+            <>
+              <Typography
+                variant="body2"
+                onClick={() => router.push("/")}
+                style={{ fontSize: "12px" }}
+              >
+                {headerText}
+              </Typography>
+              <Typography
+                variant="body1"
+                onClick={() => router.push("/")}
+                style={{ fontWeight: "bold" }}
+              >
+                {meal}
+              </Typography>
+            </>
+          ) : (
+            <Typography variant="h6" onClick={() => router.push("/")}>
+              {headerText}
+            </Typography>
+          )}
+        </Grid>
         <div style={{ flexGrow: 1 }} />
-        <IconButton edge="end" color="inherit">
-          <MenuIcon />
-        </IconButton>
+        {filter ? (
+          <IconButton edge="end" color="inherit">
+            <MenuIcon />
+          </IconButton>
+        ) : null}
       </Toolbar>
     </AppBar>
   );

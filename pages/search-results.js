@@ -4,16 +4,22 @@ import MealListItem from "@/components/MealListItem/MealListItem";
 import { Grid, CircularProgress } from "@material-ui/core";
 import Template from "@/components/Template/Template";
 import Header from "@/components/Header/Header";
+import { useRouter } from "next/router";
 export default function SearchResults() {
   const mealsList = useApi({
     url: "/api/meals",
     defaultData: [],
   });
   useEffect(mealsList.call, []);
+  const {
+    query: { meal },
+  } = useRouter();
   const { data, isFetched, isLoading, hasData } = mealsList;
   return (
     <>
-      <Template header={() => <Header headerText={"results for : ${}"} />}>
+      <Template
+        header={() => <Header headerText={`results for`} meal={meal} filter />}
+      >
         <Grid
           direction="column"
           justify="flex-start"

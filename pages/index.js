@@ -9,6 +9,7 @@ import PinDropIcon from "@material-ui/icons/PinDrop";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
 import { DUBAI_PLACES, MEALS_LIST } from "@/constants";
 import { useTheme } from "@material-ui/core/styles";
+import { useState } from "react";
 
 const useStyles = makeStyles({
   autocomplete_1: { margin: "0", "& div": { borderRadius: "4px 4px 0 0 " } },
@@ -39,6 +40,8 @@ const useStyles = makeStyles({
 });
 export default function Search() {
   const router = useRouter();
+  const [location, setLocation] = useState("");
+  const [meal, setMeal] = useState("");
   const {
     autocomplete_1,
     autocomplete_2,
@@ -49,7 +52,9 @@ export default function Search() {
   } = useStyles();
   const theme = useTheme();
   return (
-    <Template header={() => <Header headerText={"Seera Foods"} } paddingTop={0}>
+    <Template
+      header={() => <Header headerText={"Seera Foods"} paddingTop={0} />}
+    >
       <Grid
         container
         justify="center"
@@ -62,6 +67,9 @@ export default function Search() {
             freeSolo
             disableClearable
             options={DUBAI_PLACES.map((option) => option)}
+            onChange={(e, newvalue) => {
+              setLocation(newvalue);
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -87,6 +95,9 @@ export default function Search() {
             freeSolo
             disableClearable
             options={MEALS_LIST.map((option) => option)}
+            onChange={(e, newvalue) => {
+              setMeal(newvalue);
+            }}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -111,8 +122,14 @@ export default function Search() {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => router.push("/search-results")}
+            onClick={() =>
+              router.push({
+                pathname: "/search-results",
+                query: { location, meal },
+              })
+            }
             className={searchButton}
+            disabled={!location || !meal}
           >
             Search Restaurants
           </Button>
