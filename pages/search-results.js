@@ -12,13 +12,20 @@ export default function SearchResults() {
   });
   useEffect(mealsList.call, []);
   const {
-    query: { meal },
+    query: { meal, location },
   } = useRouter();
   const { data, isFetched, isLoading, hasData } = mealsList;
   return (
     <>
       <Template
-        header={() => <Header headerText={`results for`} meal={meal} filter />}
+        header={() => (
+          <Header
+            headerText={`results for`}
+            meal={meal}
+            location={location}
+            filter
+          />
+        )}
       >
         <Grid
           direction="column"

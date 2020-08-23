@@ -7,7 +7,7 @@ const Template = ({ header, children, paddingTop = 56 }) => {
       direction="column"
       style={{ paddingTop: `${paddingTop}px` }}
     >
-      <Grid item>{header()}</Grid>
+      {header ? <Grid item>{header()}</Grid> : null}
       <Grid item container xs>
         {children}
       </Grid>

@@ -52,9 +52,7 @@ export default function Search() {
   } = useStyles();
   const theme = useTheme();
   return (
-    <Template
-      header={() => <Header headerText={"Seera Foods"} paddingTop={0} />}
-    >
+    <Template paddingTop={"0px"}>
       <Grid
         container
         justify="center"

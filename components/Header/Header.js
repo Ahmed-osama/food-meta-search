@@ -7,30 +7,34 @@ import {
   Grid,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/FilterList";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useRouter } from "next/router";
 
-const Header = ({ headerText, meal, filter }) => {
+const Header = ({ headerText, meal, filter, location }) => {
   const router = useRouter();
   return (
     <AppBar position="fixed" color="primary">
       <Toolbar>
-        <Grid>
+        <Grid
+          direction="row"
+          container={!!meal}
+          alignItems="center"
+          spacing={2}
+          onClick={() => router.push("/")}
+        >
           {meal ? (
             <>
-              <Typography
-                variant="body2"
-                onClick={() => router.push("/")}
-                style={{ fontSize: "12px" }}
-              >
-                {headerText}
-              </Typography>
-              <Typography
-                variant="body1"
-                onClick={() => router.push("/")}
-                style={{ fontWeight: "bold" }}
-              >
-                {meal}
-              </Typography>
+              <Grid item>
+                <ArrowBackIcon />
+              </Grid>
+              <Grid item>
+                <Typography variant="body2" style={{ fontSize: "12px" }}>
+                  {headerText}
+                </Typography>
+                <Typography variant="body1" style={{ fontWeight: "bold" }}>
+                  {meal} in {location}
+                </Typography>
+              </Grid>
             </>
           ) : (
             <Typography variant="h6" onClick={() => router.push("/")}>
