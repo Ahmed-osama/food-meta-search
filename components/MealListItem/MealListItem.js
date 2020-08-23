@@ -11,7 +11,15 @@ import {
 import { Rating } from "@material-ui/lab";
 import { useTheme } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
-const MealListItem = ({ meal_name, price, meal_image, stars }) => {
+const MealListItem = ({
+  meal_name,
+  price,
+  meal_image,
+  stars,
+  brand_logo,
+  meal_description,
+  reviews_count,
+}) => {
   const router = useRouter();
 
   const theme = useTheme();
@@ -57,7 +65,7 @@ const MealListItem = ({ meal_name, price, meal_image, stars }) => {
               noWrap
               style={{ marginBottom: "5px", color: theme.palette.grey[700] }}
             >
-              rice + 2 pices + water + coke
+              {meal_description}
             </Typography>
             <Grid item container spacing={1}>
               <Rating
@@ -73,20 +81,11 @@ const MealListItem = ({ meal_name, price, meal_image, stars }) => {
                 style={{ color: theme.palette.grey[700] }}
                 className="MuiGrid-item"
               >
-                3.1
-              </Typography>
-
-              <Typography
-                variant="body2"
-                noWrap
-                style={{ color: theme.palette.grey[700] }}
-                className="MuiGrid-item"
-              >
-                ({stars}) reviews
+                ({reviews_count}) reviews
               </Typography>
             </Grid>
             <img
-              src={`./logos/${_random(1, 5)}.png`}
+              src={`./logos/${brand_logo}.png`}
               alt=""
               style={{ maxHeight: "20px", maxWidth: "90px", marginTop: "10px" }}
             />
