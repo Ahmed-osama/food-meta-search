@@ -43,11 +43,7 @@ const Header = ({ headerText, meal, filter, location }) => {
           )}
         </Grid>
         <div style={{ flexGrow: 1 }} />
-        {filter ? (
-          <IconButton edge="end" color="inherit">
-            <MenuIcon />
-          </IconButton>
-        ) : null}
+        {filter ? "العربية" : null}
       </Toolbar>
     </AppBar>
   );

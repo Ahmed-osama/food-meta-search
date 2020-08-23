@@ -1,34 +1,33 @@
 import React from "react";
 import _random from "lodash/random";
-import {
-  Paper,
-  Grid,
-  Button,
-  Typography,
-  Divider,
-  Box,
-} from "@material-ui/core";
+import { Paper, Grid, Button, Typography, Divider } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import { useTheme } from "@material-ui/core/styles";
 import { useRouter } from "next/router";
+
 const MealListItem = ({
   meal_name,
   price,
   meal_image,
   stars,
+  brand,
   brand_logo,
   meal_description,
   reviews_count,
+  final_price,
+  index,
 }) => {
   const router = useRouter();
-
   const theme = useTheme();
+  const discount = Math.abs(Math.round(((price - final_price) / price) * 100));
+  const isBestDeal = index === 0;
+
   return (
     <>
       <Paper
         elevation={0}
         variant="square"
-        style={{ marginBottom: "5px", marginTop: "5px" }}
+        style={{ marginBottom: "5px", marginTop: "5px", position: "relative" }}
       >
         <Grid
           direction="row"
@@ -108,19 +107,59 @@ const MealListItem = ({
               container
               style={{ marginTop: "10px" }}
             >
-              <Typography noWrap variant="h6">
+              {discount ? (
+                <span
+                  style={{
+                    padding: "2px 5px",
+                    borderRadius: "2px 0 0 2px",
+                    background: theme.palette.error.dark,
+                    fontSize: "12px",
+                    color: "white",
+                    fontFamily: "Roboto",
+                    fontWeight: "bold",
+                    marginBottom: "5px",
+                    minWidth: "30px",
+                    top: "10px",
+                    right: "0px",
+                    textAlign: "center",
+                  }}
+                >
+                  {discount}%
+                </span>
+              ) : null}
+              <Typography
+                noWrap
+                variant="h6"
+                style={{
+                  lineHeight: "20px",
+                  color: isBestDeal ? theme.palette.success.dark : "black",
+                }}
+              >
                 {price}
               </Typography>
-              <Typography noWrap variant="body2">
+              <Typography
+                noWrap
+                variant="body2"
+                style={{
+                  fontSize: "12",
+                  color: isBestDeal ? theme.palette.success.dark : "black",
+                }}
+              >
                 AED
               </Typography>
             </Grid>
             <Button
               variant="outlined"
               color="primary"
-              style={{ marginTop: "auto" }}
+              style={{ marginTop: "10px" }}
               size="small"
-              onClick={() => router.push("/redirection")}
+              onClick={() => {
+                router.push("/redirection");
+                window.localStorage.setItem(
+                  "SELECTED_MEAL_PROVIDER",
+                  JSON.stringify({ brand, brand_logo })
+                );
+              }}
             >
               View
             </Button>

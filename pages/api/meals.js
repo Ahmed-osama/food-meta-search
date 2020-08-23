@@ -15,7 +15,7 @@ export default (req, res) => {
       },
       {
         id: "2",
-        meal_name: "friend chicken",
+        meal_name: "Fried chicken",
         meal_image: "meals/friend-checkin.jpeg",
         price: 46,
         final_price: 46,

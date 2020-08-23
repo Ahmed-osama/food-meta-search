@@ -47,7 +47,9 @@ export default function SearchResults() {
             </Grid>
           ) : null}
           {hasData
-            ? data.map((props) => <MealListItem {...props} key={props.id} />)
+            ? data.map((props, index) => (
+                <MealListItem {...props} key={props.id} index={index} />
+              ))
             : null}
         </Grid>
       </Template>
