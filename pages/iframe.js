@@ -9,6 +9,11 @@ const useStyles = makeStyles({
     height: "calc(100vh - 56px)",
     marginTop: "56px",
     width: "100%",
+    overflowX: "hidden",
+    overflowY: "scroll",
+    "& img": {
+      maxWidth: "100%",
+    },
   },
 });
 export default function Redirection() {
@@ -26,10 +31,9 @@ export default function Redirection() {
       header={() => <Header headerText={provider ? provider.brand : "---"} />}
       paddingTop={0}
     >
-      <iframe
-        src="https://www.pizzahut.ae/en/deals/favorite-5/9428407"
-        className={mainContainer}
-      ></iframe>
+      <div className={mainContainer}>
+        <img src="./talabat-screenshot.png" />
+      </div>
     </Template>
   );
 }
