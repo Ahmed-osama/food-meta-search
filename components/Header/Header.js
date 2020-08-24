@@ -43,7 +43,7 @@ const Header = ({ headerText, meal, filter, location }) => {
           )}
         </Grid>
         <div style={{ flexGrow: 1 }} />
-        {filter ? "العربية" : null}
+        {"العربية"}
       </Toolbar>
     </AppBar>
   );
