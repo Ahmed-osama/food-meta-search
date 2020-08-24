@@ -87,7 +87,6 @@ export default function SearchResults() {
             Sort
           </Button>
         </Grid>
-        <pre>{JSON.stringify(filtersState, null, 2)}</pre>
         <Grid
           direction="column"
           justify="flex-start"
