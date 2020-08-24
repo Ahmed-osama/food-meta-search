@@ -42,6 +42,7 @@ export function useApi({ url, defaultData }) {
       });
   });
   return {
+    apiState: apiStore.state,
     data: dataStore.state,
     ...apiStore.computed,
     ...dataStore.computed,
