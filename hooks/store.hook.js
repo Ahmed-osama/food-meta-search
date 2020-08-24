@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-export function useStore(initStoreState) {
+export function useStore(initStoreState, deps = []) {
   const [state, setState] = useState(initStoreState.initial);
   const [computed, setComputed] = useState({});
 
@@ -10,7 +10,7 @@ export function useStore(initStoreState) {
         return acc;
       }, {})
     );
-  }, [state]);
+  }, [state, ...deps]);
 
   return { state, computed, setState };
 }
