@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from "uuid";
 export default (req, res) => {
   try {
     const data = [
@@ -63,7 +64,11 @@ export default (req, res) => {
       },
     ];
     res.statusCode = 200;
-    res.send([...data, ...data, ...data, ...data, ...data]);
+    res.send(
+      [...data, ...data, ...data, ...data, ...data].map((item) => {
+        return { ...item, id: uuidv4() };
+      })
+    );
   } catch (err) {
     res.statusCode = 500;
     res.send(err.message);
